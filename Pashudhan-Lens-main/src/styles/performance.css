@@ -1,0 +1,227 @@
+/* Performance Optimizations CSS */
+/* GPU acceleration and smooth animations */
+
+:root {
+  /* CSS Custom Properties for performance */
+  --animation-duration: 0.3s;
+  --transition-duration: 0.2s;
+  --easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --hardware-acceleration: translateZ(0);
+}
+
+/* Hardware acceleration for common elements */
+.optimized-component,
+.page-wrapper,
+.loading-overlay,
+.breadcrumb-container {
+  transform: var(--hardware-acceleration);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: auto;
+}
+
+/* Smooth scrolling optimization */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Containment for layout optimization */
+.page-container {
+  contain: layout style paint;
+}
+
+.image-container {
+  contain: layout style;
+}
+
+/* Animation performance optimizations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%) translateZ(0);
+  }
+  to {
+    transform: translateX(0) translateZ(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05) translateZ(0);
+  }
+}
+
+/* Optimized transitions */
+.smooth-transition {
+  transition: all var(--transition-duration) var(--easing);
+  transform: var(--hardware-acceleration);
+}
+
+.fade-transition {
+  transition: opacity var(--transition-duration) var(--easing);
+}
+
+/* Performance-aware media queries */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --animation-duration: 0.1s;
+    --transition-duration: 0.05s;
+  }
+  
+  * {
+    animation-duration: 0.1s !important;
+    transition-duration: 0.05s !important;
+  }
+}
+
+/* High performance mode */
+.high-performance-mode {
+  --animation-duration: 0.1s;
+  --transition-duration: 0.05s;
+}
+
+.high-performance-mode * {
+  animation-duration: 0.1s !important;
+  transition-duration: 0.05s !important;
+}
+
+/* GPU-optimized transforms */
+.gpu-optimized {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Image loading optimization */
+.loading-image {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Optimized glass morphism */
+.glass-morphism {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: var(--hardware-acceleration);
+  will-change: backdrop-filter;
+}
+
+/* Scroll optimization */
+.optimized-scroll {
+  overflow-anchor: none;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Layout optimization for Flexbox/Grid */
+.layout-optimized {
+  contain: layout;
+  will-change: auto;
+}
+
+/* Text rendering optimization */
+.text-optimized {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Critical CSS for above-the-fold content */
+.critical-content {
+  contain: layout style;
+  transform: var(--hardware-acceleration);
+}
+
+/* Lazy loading optimization */
+.lazy-load {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
+/* Performance monitor styles */
+.performance-monitor {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: var(--hardware-acceleration);
+  contain: layout style paint;
+}
+
+/* Device-specific optimizations */
+@media (max-width: 768px) {
+  :root {
+    --animation-duration: 0.2s;
+    --transition-duration: 0.15s;
+  }
+}
+
+@media (pointer: coarse) {
+  /* Touch device optimizations */
+  .touch-optimized {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Low-end device optimizations */
+.low-end-device {
+  --animation-duration: 0.1s;
+  --transition-duration: 0.05s;
+}
+
+.low-end-device * {
+  animation-duration: 0.1s !important;
+  transition-duration: 0.05s !important;
+  will-change: auto !important;
+}
+
+/* Memory optimization */
+.memory-optimized {
+  contain: strict;
+  content-visibility: auto;
+}
+
+/* Intersection observer optimization */
+.observe-intersection {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+/* Progressive enhancement */
+@supports (backdrop-filter: blur()) {
+  .progressive-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+@supports not (backdrop-filter: blur()) {
+  .progressive-blur {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
