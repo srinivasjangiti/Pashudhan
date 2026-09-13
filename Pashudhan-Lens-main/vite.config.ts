@@ -15,6 +15,10 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // Local stub for Clerk so the app boots without contacting Clerk's
+      // servers. See src/lib/clerk-stub.tsx. Remove this line to re-enable
+      // real Clerk auth (and set VITE_CLERK_PUBLISHABLE_KEY at build time).
+      "@clerk/clerk-react": path.resolve(__dirname, "./src/lib/clerk-stub.tsx"),
     },
   },
   // Performance optimizations

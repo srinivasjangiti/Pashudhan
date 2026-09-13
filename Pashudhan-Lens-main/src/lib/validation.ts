@@ -24,18 +24,36 @@ export const breedIdentificationRequestSchema = z.object({
 })
 
 // Environment variables validation
+// We intentionally do not throw on missing keys at module load. The app
+// is shipped in a guest/demo mode that boots without external services:
+// Clerk is stubbed (see vite.config.ts alias -> src/lib/clerk-stub.tsx)
+// and Gemini uses a placeholder so the UI still mounts. Replace these
+// placeholders with real values via Vercel env vars to enable the
+// respective integrations.
+const PLACEHOLDER_GEMINI_KEY = 'PLACEHOLDER_GEMINI_API_KEY';
+const PLACEHOLDER_CLERK_KEY = 'PLACEHOLDER_CLERK_PUBLISHABLE_KEY';
+
 export const envSchema = z.object({
   VITE_GEMINI_API_KEY: z.string().min(1, 'Gemini API key is required'),
   VITE_CLERK_PUBLISHABLE_KEY: z.string().min(1, 'Clerk publishable key is required')
 })
 
-// Validate environment variables at startup
+// Validate environment variables at startup, returning placeholders if any
+// required key is missing instead of throwing.
 export const validateEnv = () => {
+  const raw = import.meta.env as Record<string, string | undefined>;
+  const result = {
+    VITE_GEMINI_API_KEY: raw.VITE_GEMINI_API_KEY || PLACEHOLDER_GEMINI_KEY,
+    VITE_CLERK_PUBLISHABLE_KEY: raw.VITE_CLERK_PUBLISHABLE_KEY || PLACEHOLDER_CLERK_KEY,
+  };
   try {
-    return envSchema.parse(import.meta.env)
+    return envSchema.parse(result);
   } catch (error) {
-    console.error('Environment validation failed:', error)
-    throw new Error('Invalid environment configuration. Please check your .env file.')
+    console.warn(
+      '[Pashudhan] Environment validation failed; using placeholder values so the app can still load.',
+      error
+    );
+    return result as z.infer<typeof envSchema>;
   }
 }
 
