@@ -26,6 +26,7 @@ const Home = React.lazy(() =>
   })
 );
 const About = React.lazy(() => import('../pages/About'));
+const Credits = React.lazy(() => import('../pages/Credits'));
 const Upload = React.lazy(() => 
   import('../pages/Upload').then(module => {
     // Preload results page for faster transitions
@@ -153,6 +154,10 @@ export const HomeWrapper = memo(() => {
     navigate('/library');
   }, [navigate]);
 
+  const handleNavigateCredits = useCallback(() => {
+    navigate('/credits');
+  }, [navigate]);
+
   // Show appropriate background based on loading phase
   return (
     <StablePageWrapper 
@@ -180,6 +185,7 @@ export const HomeWrapper = memo(() => {
             onGetStarted={handleGetStarted} 
             onNavigateAbout={handleNavigateAbout}
             onNavigateLibrary={handleNavigateLibrary}
+            onNavigateCredits={handleNavigateCredits}
           />
         </Suspense>
       </ContentWithSkeleton>
@@ -216,6 +222,10 @@ export const AboutWrapper = memo(() => {
     navigate('/library');
   }, [navigate]);
 
+  const handleNavigateCredits = useCallback(() => {
+    navigate('/credits');
+  }, [navigate]);
+
   return (
     <StablePageWrapper 
       isLoading={!isContentReady} 
@@ -243,6 +253,7 @@ export const AboutWrapper = memo(() => {
               onGetStarted={handleGetStarted} 
               onNavigateHome={handleNavigateHome}
               onNavigateLibrary={handleNavigateLibrary}
+              onNavigateCredits={handleNavigateCredits}
             />
           </SignedIn>
           <SignedOut>
@@ -250,6 +261,7 @@ export const AboutWrapper = memo(() => {
               onGetStarted={handleGetStarted} 
               onNavigateHome={handleNavigateHome}
               onNavigateLibrary={handleNavigateLibrary}
+              onNavigateCredits={handleNavigateCredits}
             />
           </SignedOut>
         </Suspense>
@@ -259,6 +271,51 @@ export const AboutWrapper = memo(() => {
 });
 
 AboutWrapper.displayName = 'AboutWrapper';
+
+// Wrapper for Credits page
+export const CreditsWrapper = memo(() => {
+  const { isContentReady } = useContentLoading(0, 200, 800);
+
+  const navigate = useNavigate();
+
+  const handleGetStarted = useCallback(() => {
+    navigate('/upload');
+  }, [navigate]);
+
+  const handleNavigateHome = useCallback(() => {
+    navigate('/');
+  }, [navigate]);
+
+  const handleNavigateAbout = useCallback(() => {
+    navigate('/about');
+  }, [navigate]);
+
+  const handleNavigateLibrary = useCallback(() => {
+    navigate('/library');
+  }, [navigate]);
+
+  return (
+    <StablePageWrapper
+      isLoading={!isContentReady}
+      loadingMessage="Loading Credits..."
+      glassVariant="light"
+      background="default"
+      className="transition-all duration-500"
+    >
+      <RouterNavigationBreadcrumb />
+      <Suspense fallback={<div />}>
+        <Credits
+          onNavigateHome={handleNavigateHome}
+          onGetStarted={handleGetStarted}
+          onNavigateAbout={handleNavigateAbout}
+          onNavigateLibrary={handleNavigateLibrary}
+        />
+      </Suspense>
+    </StablePageWrapper>
+  );
+});
+
+CreditsWrapper.displayName = 'CreditsWrapper';
 
 // Wrapper for Upload page with natural loading patterns  
 const UploadWrapperContent = memo(() => {

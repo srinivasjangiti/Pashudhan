@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { NavBar } from '@/components/ui/tubelight-navbar';
 import { SharedLayout } from '@/components/SharedLayout';
 import { CritterTypewriter } from '@/components/CritterTypewriter';
-import { Leaf, Binoculars, Camera, ArrowRight, Home as HomeIcon, Upload, Info, Search, BookOpen } from 'lucide-react';
+import { Leaf, Binoculars, Camera, ArrowRight, Home as HomeIcon, Upload, Info, Search, BookOpen, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroImage from '@/assets/hero-wildlife.jpg';
 
@@ -11,16 +11,18 @@ interface HomeProps {
   onGetStarted: () => void;
   onNavigateAbout?: () => void;
   onNavigateLibrary?: () => void;
+  onNavigateCredits?: () => void;
 }
 
-const Home = memo<HomeProps>(({ onGetStarted, onNavigateAbout, onNavigateLibrary }) => {
+const Home = memo<HomeProps>(({ onGetStarted, onNavigateAbout, onNavigateLibrary, onNavigateCredits }) => {
   // Memoize navigation items to prevent re-creation
   const navItems = useMemo(() => [
     { name: 'Home', url: '#home', icon: HomeIcon },
     { name: 'Identify', url: '#identify', icon: Search },
     { name: 'Upload', url: '#upload', icon: Upload },
     { name: 'Library', url: '#library', icon: BookOpen },
-    { name: 'About', url: '#about', icon: Info }
+    { name: 'About', url: '#about', icon: Info },
+    { name: 'Credits', url: '#credits', icon: User }
   ], []);
 
   // Memoize feature items
@@ -37,6 +39,8 @@ const Home = memo<HomeProps>(({ onGetStarted, onNavigateAbout, onNavigateLibrary
       onNavigateAbout();
     } else if (item.name === 'Library' && onNavigateLibrary) {
       onNavigateLibrary();
+    } else if (item.name === 'Credits' && onNavigateCredits) {
+      onNavigateCredits();
     }
     // For other nav items, you can add scroll to sections or other actions
   };

@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { NavBar } from '@/components/ui/tubelight-navbar';
-import { Home as HomeIcon, Upload, Info, Search, BookOpen, Zap, Shield, Users, Award, Target } from 'lucide-react';
+import { Home as HomeIcon, Upload, Info, Search, BookOpen, Zap, Shield, Users, Award, Target, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroImage from '@/assets/hero-wildlife.jpg';
 import { useAppContext } from '@/contexts/AppContext';
@@ -10,9 +10,10 @@ interface AboutProps {
   onGetStarted: () => void;
   onNavigateHome: () => void;
   onNavigateLibrary?: () => void;
+  onNavigateCredits?: () => void;
 }
 
-const About = memo<AboutProps>(({ onGetStarted, onNavigateHome, onNavigateLibrary }) => {
+const About = memo<AboutProps>(({ onGetStarted, onNavigateHome, onNavigateLibrary, onNavigateCredits }) => {
   const { state } = useAppContext();
   // Memoize navigation items to prevent re-creation
   const navItems = useMemo(() => [
@@ -20,7 +21,8 @@ const About = memo<AboutProps>(({ onGetStarted, onNavigateHome, onNavigateLibrar
     { name: 'Identify', url: '#identify', icon: Search },
     { name: 'Upload', url: '#upload', icon: Upload },
     { name: 'Library', url: '#library', icon: BookOpen },
-    { name: 'About', url: '#about', icon: Info }
+    { name: 'About', url: '#about', icon: Info },
+    { name: 'Credits', url: '#credits', icon: User }
   ], []);
 
   // About page specific features
@@ -40,6 +42,8 @@ const About = memo<AboutProps>(({ onGetStarted, onNavigateHome, onNavigateLibrar
       onNavigateHome();
     } else if (item.name === 'Library' && onNavigateLibrary) {
       onNavigateLibrary();
+    } else if (item.name === 'Credits' && onNavigateCredits) {
+      onNavigateCredits();
     }
   };
 

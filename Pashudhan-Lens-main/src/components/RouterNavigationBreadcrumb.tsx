@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Home, Upload, Search, Plus } from 'lucide-react';
+import { ChevronRight, Home, Upload, Search, Plus, User } from 'lucide-react';
 import { UserButton, SignedIn } from '@clerk/clerk-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -13,7 +13,8 @@ const pageInfo = {
   '/home': { label: 'Home', icon: Home, color: 'text-emerald-400' },
   '/about': { label: 'About', icon: Home, color: 'text-indigo-400' },
   '/upload': { label: 'Upload', icon: Upload, color: 'text-blue-400' },
-  '/results': { label: 'Breed Results', icon: Search, color: 'text-purple-400' }
+  '/results': { label: 'Breed Results', icon: Search, color: 'text-purple-400' },
+  '/credits': { label: 'Credits', icon: User, color: 'text-amber-400' }
 };
 
 export const RouterNavigationBreadcrumb: React.FC<BreadcrumbProps> = ({ 
@@ -78,6 +79,8 @@ export const RouterNavigationBreadcrumb: React.FC<BreadcrumbProps> = ({
         return ['/', '/upload'];
       case '/results':
         return ['/', '/upload', '/results'];
+      case '/credits':
+        return ['/', '/credits'];
       default:
         return ['/'];
     }

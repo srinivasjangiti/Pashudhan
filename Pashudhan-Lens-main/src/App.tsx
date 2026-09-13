@@ -39,6 +39,7 @@ const AboutWrapper = lazy(() => import("./components/RouterWrappers").then(modul
 const UploadWrapper = lazy(() => import("./components/RouterWrappers").then(module => ({ default: module.UploadWrapper })));
 const ResultsWrapper = lazy(() => import("./components/RouterWrappers").then(module => ({ default: module.ResultsWrapper })));
 const LibraryWrapper = lazy(() => import("./components/RouterWrappers").then(module => ({ default: module.LibraryWrapper })));
+const CreditsWrapper = lazy(() => import("./components/RouterWrappers").then(module => ({ default: module.CreditsWrapper })));
 
 // Optimized Query Client configuration for better performance
 const queryClient = new QueryClient({
@@ -129,6 +130,7 @@ const App = memo(() => {
                     <Route path="/upload" element={<UploadWrapper />} />
                     <Route path="/library" element={<LibraryWrapper />} />
                     <Route path="/results" element={<ResultsWrapper />} />
+                    <Route path="/credits" element={<CreditsWrapper />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
