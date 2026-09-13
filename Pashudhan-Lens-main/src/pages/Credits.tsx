@@ -47,8 +47,8 @@ const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     label: "X (Twitter)",
-    handle: "@srinivasajan",
-    url: "https://x.com/srinivasajan",
+    handle: "@sriwanders",
+    url: "https://x.com/sriwanders",
     icon: Twitter,
     accent: "from-slate-700 to-slate-900",
     ring: "hover:ring-slate-500/60",
@@ -56,8 +56,8 @@ const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     label: "Substack",
-    handle: "@srinivasjan",
-    url: "https://substack.com/@srinivasjan",
+    handle: "@sriwanders",
+    url: "https://substack.com/@sriwanders",
     icon: BookOpen,
     accent: "from-orange-500 to-rose-500",
     ring: "hover:ring-orange-400/60",
@@ -65,8 +65,8 @@ const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     label: "Medium",
-    handle: "@srinivasajan",
-    url: "https://medium.com/srinivasajan",
+    handle: "@sriwanders",
+    url: "https://medium.com/@sriwanders",
     icon: BookOpen,
     accent: "from-emerald-600 to-teal-700",
     ring: "hover:ring-emerald-400/60",
